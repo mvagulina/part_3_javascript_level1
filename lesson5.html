@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chess desk</title>
+    <style>
+        .desk {
+            width: 600px;
+            height: 600px;
+            border: 2px solid black;
+        }
+        .chess-field {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .rotate-field {
+            transform: rotate(180deg);
+        }
+        .white {
+            background-color: white;
+            font-size: 30px;
+        }
+        .black {
+            background-color: lightgray;
+            font-size: 30px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container"></div>
+</body>
+<script>
+    var letters = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', ''];
+    var white_figures = ['&#9817;', '&#9814;', '&#9816;', '&#9815;', '&#9812;', '&#9813;', '&#9815;', '&#9816;', '&#9814;'];
+    var black_figures = ['&#9823;', '&#9820;', '&#9822;', '&#9821;', '&#9818;', '&#9819;', '&#9821;', '&#9822;', '&#9820;'];
+
+    var container = document.querySelector('.container');
+    var table = document.createElement("table");
+    table.className = "desk";
+
+    for (var line = 0; line < 10; line++) {
+        var tr = document.createElement("tr");
+
+        for (var column = 0; column < 10; column++) {
+            var td = document.createElement("td");
+            td.className = "chess-field ";
+
+            // rotate numbers and letters
+            if (line == 0 || column == 9 || line == 1 || line == 2) {
+                td.className += "rotate-field "
+            }
+            // figures
+            if (line == 1) {
+                if (column > 0 && column < 9) {
+                    td.innerHTML = white_figures[column];
+                }
+            } else if (line == 2) {
+                if (column > 0 && column < 9) {
+                    td.innerHTML = white_figures[0];
+                }
+            } else if (line == 8) {
+                if (column > 0 && column < 9) {
+                    td.innerHTML = black_figures[column];
+                }
+            } else if (line == 7) {
+                if (column > 0 && column < 9) {
+                    td.innerHTML = black_figures[0];
+                }
+            }
+            // fill fields
+            if (line == 0 || line == 9) {
+                td.innerText = letters[column];
+            } else if (column == 0 || column == 9) {
+                td.innerText = line;
+            } else if ((line % 2 == 1 && column % 2 == 1) || (line % 2 == 0 && column % 2 == 0)) {
+                td.className += "white";
+            } else if (((line % 2 == 1 && column % 2 == 0) || (line % 2 == 0 && column % 2 == 1))) {
+                td.className += "black";
+            }
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+    }
+    container.appendChild(table);
+</script>
+</html>
