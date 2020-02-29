@@ -24,10 +24,10 @@ td.game-table-cell{
     background-color: white;
 }
 .food-unit{
-    background-color: green;
+    background-color: greenyellow;
 }
 .bomb-unit{
-    background-color: red;
+    background-color: lightgray;
 }
 .buttons{
     display: inline-block;
