@@ -111,16 +111,26 @@ function move() {
 
     // Определяем новую точку
     if (direction == 'x-') {
+        if (coord_x == 0)
+            coord_x = FIELD_SIZE_X;
         new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x - 1))[0];
     }
     else if (direction == 'x+') {
-        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x + 1))[0];
+        coord_x++;
+        if (coord_x == FIELD_SIZE_X)
+            coord_x = 0;
+        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x))[0];
     }
     else if (direction == 'y+') {
+        if (coord_y == 0)
+            coord_y = FIELD_SIZE_Y;
         new_unit = document.getElementsByClassName('cell-' + (coord_y - 1) + '-' + (coord_x))[0];
     }
     else if (direction == 'y-') {
-        new_unit = document.getElementsByClassName('cell-' + (coord_y + 1) + '-' + (coord_x))[0];
+        coord_y++;
+        if (coord_y == FIELD_SIZE_Y)
+            coord_y = 0;
+        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (coord_x))[0];
     }
 
     // Проверки
@@ -177,6 +187,7 @@ function haveFood(unit) {
         createFood();
 
         score++;
+        document.getElementById('score').textContent = score;
     }
     return check;
 }
